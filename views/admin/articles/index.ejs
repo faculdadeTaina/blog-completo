@@ -4,41 +4,34 @@
 <div class="container">
     <hr>
     <h2>Artigos</h2>
-    <a class="btn btn-success" href="/admin/categories/new">Criar nova categoria</a>
+    <a class="btn btn-success" href="/admin/articles/new">Criar novo artigo</a>
     <table class="table table-bordered">
         <thead>
 <tr>
     <th>Id</th>
     <th>Título</th>
     <th>Slug</th>
-    <th>Açoes</th>
+    <th>Categoria</th>
+    <th>Ações</th>
+   
 </tr>
 </thead>
   <tbody>
-
-    <% categories.forEach(category => { %>
-
-        <tr>
-            <th><%=  category.id %></th>
-            <th><%= category.title %></th>
-            <th><%=  category.slug %></th>
-            <th>
-                <a href="/admin/categories/edit/<%= category.id %>"
-                 class="btn btn-warning">Editar</a>
-
-        <form method="POST" action="/categories/delete"
-         style="display: inline;" 
-        onsubmit="confirmardelecao(event, this)">
-          
-            <input type="hidden" name="id" value="<%= category.id %> ">
-
-            <button class="btn btn-danger">Deletar</button>
-        </form>
-
-            </th>
-        </tr>
-
-        <% }) %>
+      
+<% articles.forEach(article => { %>
+    <tr>
+    <td><%= article.id %></td>
+    <td><%= article.title %></td>
+    <td><%= article.slug %></td>
+    <td><%= article.category %></td>
+    <td>
+        <form method="POST" action="/articles/delete" style="display: inline;" onsubmit="confirmardelecao(event, this)">
+           <input type="hidden" name="id" value="<%= article.id %> ">
+           <button class="btn btn-danger">Deletar</button>
+       </form>
+    </td>
+</tr>
+<% }) %>
 
      </tbody>
     </table>
@@ -51,10 +44,9 @@
 function confirmardelecao(event, form){
         event.preventDefault();
         console.log('oi')
-    var decisao= confirm("Quer deletar a categoria?")
-
+    var decisao= confirm("Quer deletar o artigo?")
             if(decisao){
             form.submit()
             }
 }
-            </script>
+ </script>
